@@ -1,19 +1,25 @@
 ---
-name: scope-guard
+name: surgical
 description: >
   Forces Claude to match output scope exactly to what was requested. Triggers before adding error
-  handling for impossible cases, extracting one-time abstractions into classes, writing tests that
-  weren't asked for, refactoring surrounding code during a bug fix, or future-proofing with config
-  options nobody requested. The best code is code you didn't write.
+  handling for impossible edge cases, extracting one-time abstractions into classes, writing tests
+  that weren't asked for, refactoring surrounding code during a bug fix, or future-proofing with
+  config options nobody requested. Does not trigger when error handling, tests, or validation are
+  the explicit subject of the request. The best code is code you didn't write.
 version: 1.0.0
 ---
 
-# Scope Guard — Build Exactly What Was Asked
+# Surgical — Build Exactly What Was Asked
 
 > "Perfection is achieved not when there is nothing more to add, but when there is nothing left to take away." — Antoine de Saint-Exupéry
 
 Every line of unrequested code costs twice: once to generate, once for the user to read and discard.
 Match the output scope to the request scope. Nothing more.
+
+**Override this skill immediately when:**
+- The user explicitly asks for a complete or production-ready implementation
+- The request is for error handling, validation, or tests (those are the task, not scope creep)
+- Safety or security genuinely requires defensive code
 
 ---
 
@@ -118,6 +124,7 @@ Some additions are genuinely necessary even when not requested:
 - A required import the task clearly needs
 - A type annotation that removes ambiguity
 - A single line preventing an obvious crash the user would hit immediately
+- A single line preventing obviously wrong output (e.g. a timezone offset that would produce incorrect dates in the caller's context)
 
 For anything beyond these, surface it explicitly:
 
@@ -139,3 +146,5 @@ Override this skill when:
 
 **Build exactly what was asked. Note what was deliberately left out.
 Never silently expand the scope.**
+
+If scope is genuinely ambiguous — ask the user one targeted question before writing any code.

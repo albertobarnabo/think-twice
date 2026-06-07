@@ -15,7 +15,7 @@
 
 > *"A great engineer is a lazy engineer. They find the clever shortcut."* — Steve Jobs
 
-**think-twice** is a Claude Code plugin with two skills — one beat of reflection before picking an approach, and one guardrail against scope creep during implementation.
+**think-twice** is the flagship skill of **lean** — a Claude Code plugin with two skills: one beat of reflection before picking an approach, and one guardrail against scope creep during implementation.
 
 </div>
 
@@ -33,8 +33,8 @@ LLMs default to the most obvious path. When given a task, they start executing i
 
 | Skill | Fires when | What it prevents |
 |---|---|---|
-| **think-twice** | Before picking an approach | Reaching for a complex implementation when an API, package, or one-liner already exists |
-| **scope-guard** | Before writing code | Adding error handling, abstractions, and tests nobody asked for |
+| [**think-twice**](skills/think-twice/) | Before picking an approach | Reaching for a complex implementation when an API, package, or one-liner already exists |
+| [**surgical**](skills/surgical/) | Before writing code | Adding error handling, abstractions, and tests nobody asked for |
 
 ---
 
@@ -130,13 +130,13 @@ LLMs default to the most obvious path. When given a task, they start executing i
 
 ---
 
-## scope-guard in Action
+## surgical in Action
 
 <details>
 <summary><strong>"Fix the off-by-one error in parse_date"</strong></summary>
 <br/>
 
-| | Without scope-guard | With scope-guard |
+| | Without surgical | With surgical |
 |---|---|---|
 | **Output** | Bug fix + input validation + docstring + 3 unit tests + variable renames | The off-by-one fix, nothing else |
 | **Tokens** | ~800 | ~120 — **7x fewer** |
@@ -158,7 +158,7 @@ Result: `"Fixed the off-by-one on line 14. Didn't add tests or validation — le
 **One-liner curl** (installs both skills):
 ```bash
 BASE="https://raw.githubusercontent.com/albertobarnabo/think-twice/main/skills"
-for skill in think-twice scope-guard; do
+for skill in think-twice surgical; do
   curl -sL "$BASE/$skill/SKILL.md" -o ~/.claude/skills/$skill/SKILL.md --create-dirs
 done
 ```
@@ -176,7 +176,7 @@ Skills load automatically when relevant — no slash commands needed.
 | Command | What it does |
 |---|---|
 | `/think-twice:think-twice <task>` | Force the checklist on a specific task |
-| `/think-twice:scope-guard <task>` | Implement with zero scope creep — exactly what was asked |
+| `/think-twice:surgical <task>` | Implement with zero scope creep — exactly what was asked |
 
 Commands and skills complement each other: skills fire automatically in the background, commands let you invoke the same behavior explicitly when you need it.
 
@@ -190,7 +190,7 @@ Commands and skills complement each other: skills fire automatically in the back
 | Latency-sensitive hot path | A runtime API call adds unacceptable delay |
 | Offline-first / zero-dependency env | External solutions not allowed |
 | The shortcut is overkill | Don't add a library for 5 lines of trivial code |
-| Scope expansion was explicitly requested | No need for scope-guard when the user asked for extras |
+| Scope expansion was explicitly requested | No need for surgical when the user asked for extras |
 
 In all cases, Claude proceeds — but **states why** it's not applying the skill.
 
