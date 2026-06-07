@@ -2,13 +2,13 @@
 
 > Forces Claude to pause before any high-cost task and ask: "Is there a cleverer, cheaper way to do this?"
 
-Part of the **lean** plugin — [albertobarnabo/think-twice](https://github.com/albertobarnabo/think-twice)
+Part of the **lean** plugin — [albertobarnabo/lean](https://github.com/albertobarnabo/lean)
 
 ---
 
 ## What it does
 
-LLMs default to the most obvious path. Given "build city autocomplete for all cities worldwide", Claude will start writing a 10,000-entry JSON array — when `npm install world-cities` would have done it in 25 lines at 500x fewer tokens.
+LLMs default to the most obvious path. Given "generate 500 realistic user profiles for staging", Claude will write 500 inline JSON objects — when a 54-line faker script would do it in 178x fewer tokens, with better data quality.
 
 think-twice rewires that instinct. Before any expensive implementation, Claude runs a 6-checkpoint checklist to find the cheap path first.
 
@@ -29,13 +29,15 @@ If any checkpoint reveals a better path — take it. Explain what was chosen and
 
 ## Token Savings
 
+Measured from full code outputs, character-counted by independent test agents.
+
 | Task | Without skill | With skill | Saved |
 |---|---|---|---|
-| City autocomplete (worldwide) | ~201,000 tokens | ~400 tokens | **500x** |
-| 500 fake staging profiles | ~50,500 tokens | ~200 tokens | **250x** |
-| Live currency conversion | ~5,500 tokens | ~350 tokens | **16x** |
-| PDF invoice generation | ~6,000 tokens | ~650 tokens | **9x** |
-| Sliding window rate limiter | ~3,500 tokens | ~300 tokens | **12x** |
+| 500 fake staging profiles | ~66,320 tokens | ~372 tokens | **178x** |
+| Live currency conversion | ~1,795 tokens | ~134 tokens | **13x** |
+| City autocomplete (175 cities) | ~2,460 tokens | ~410 tokens | **6x** |
+| Sliding window rate limiter | ~2,152 tokens | ~414 tokens | **5x** |
+| PDF invoice generation | ~4,281 tokens | ~2,281 tokens | **2x** |
 
 ---
 
@@ -47,9 +49,9 @@ If any checkpoint reveals a better path — take it. Explain what was chosen and
 
 | | Greedy | Think-Twice |
 |---|---|---|
-| **Approach** | Hardcodes 10,000 cities as a JSON array | `npm install world-cities` + 25-line component |
-| **Tokens** | ~201,000 | ~400 — **500x fewer** |
-| **Accuracy** | Frozen at generation time | 130,000 cities, maintained upstream |
+| **Approach** | Hardcodes cities as a static array | `npm install world-cities` + 40-line component |
+| **Tokens** | ~2,460 (175 cities) | ~410 — **6x fewer** |
+| **Accuracy** | Frozen at generation time | 23,000 cities from GeoNames, maintained upstream |
 | **Checkpoint** | — | Checkpoint 2 — existing package |
 
 </details>
@@ -60,10 +62,10 @@ If any checkpoint reveals a better path — take it. Explain what was chosen and
 
 | | Greedy | Think-Twice |
 |---|---|---|
-| **Approach** | Writes 500 JSON records inline | 15-line `faker` script, seeded |
-| **Tokens** | ~50,500 | ~200 — **250x fewer** |
-| **Re-runnability** | Zero — ephemeral output | Parameterized, version-controlled |
-| **Checkpoints** | — | Checkpoint 3 (scope) + Checkpoint 2 (faker) |
+| **Approach** | Writes 500 JSON records inline | 54-line `@faker-js/faker` script, parameterized |
+| **Tokens** | ~66,320 | ~372 — **178x fewer** |
+| **Re-runnability** | Zero — ephemeral output | Seeded, `--count` flag, version-controlled |
+| **Checkpoints** | — | Checkpoint 2 (faker) + Checkpoint 3 (500 static = wrong shape) |
 
 </details>
 
@@ -74,9 +76,9 @@ If any checkpoint reveals a better path — take it. Explain what was chosen and
 | | Greedy | Think-Twice |
 |---|---|---|
 | **Approach** | Custom Redis sorted sets + Lua script | `rate-limiter-flexible` |
-| **Tokens** | ~3,500 | ~300 — **12x fewer** |
-| **Lines of code** | ~250 | 5–15 |
-| **Checkpoints** | — | Checkpoint 1 + 2 + 4 |
+| **Tokens** | ~2,152 | ~414 — **5x fewer** |
+| **Lines of code** | ~250 | ~18 |
+| **Checkpoints** | — | Checkpoint 2 (library) + Checkpoint 4 (simpler approach) |
 
 </details>
 
@@ -86,13 +88,13 @@ If any checkpoint reveals a better path — take it. Explain what was chosen and
 
 **This skill only:**
 ```bash
-curl -sL https://raw.githubusercontent.com/albertobarnabo/think-twice/main/skills/think-twice/SKILL.md \
+curl -sL https://raw.githubusercontent.com/albertobarnabo/lean/main/skills/think-twice/SKILL.md \
   -o ~/.claude/skills/think-twice/SKILL.md --create-dirs
 ```
 
 **Full lean plugin (think-twice + surgical):**
 ```
-/plugin install albertobarnabo/think-twice
+/plugin install albertobarnabo/lean
 ```
 
 ---

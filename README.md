@@ -9,7 +9,7 @@
 [![Version](https://img.shields.io/badge/version-2.0.0-orange)](https://github.com/albertobarnabo/lean)
 [![Works with Cursor](https://img.shields.io/badge/Cursor-compatible-blue)](https://cursor.sh)
 [![Works with Codex](https://img.shields.io/badge/Codex%20CLI-compatible-green)](https://github.com/openai/codex)
-[![Tokens saved](https://img.shields.io/badge/tokens%20saved-up%20to%20500x-brightgreen)](#token-cost-at-a-glance)
+[![Tokens saved](https://img.shields.io/badge/tokens%20saved-up%20to%20178x-brightgreen)](#token-cost-at-a-glance)
 
 <br/>
 
@@ -49,7 +49,7 @@ Together they enforce lean at every level — strategy and execution.
 
 ## Token Cost at a Glance
 
-Real outputs from 6 independent test agents. Character-counted, not estimated.
+Real outputs from 11 independent test agents. Character-counted, not estimated.
 
 | Task | Greedy | Lean | Multiplier |
 |---|---|---|---|
@@ -60,7 +60,7 @@ Real outputs from 6 independent test agents. Character-counted, not estimated.
 | Sliding window rate limiter | ~2,152 tokens | ~414 tokens | **5x** |
 | PDF invoice generation | ~4,281 tokens | ~2,281 tokens | **2x** |
 
-Full benchmarks with raw outputs: [tests/](tests/)
+Each scenario was tested three ways — think-twice only, surgical only, and both — to show which skill drives the savings and when one beats the other. See [tests/summary.md](tests/summary.md) for the full breakdown.
 
 ---
 
