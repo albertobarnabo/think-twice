@@ -72,13 +72,44 @@ That's not an edge case. That's the default behavior of every AI that hasn't bee
 | Deep clone fix | ~287 tok | ~40 tok | **7×** |
 | City autocomplete | ~2,460 tok | ~410 tok | **6×** |
 | Rate limiter — sliding window | ~2,152 tok | ~414 tok | **5×** |
+| User auth setup | ~967 tok | ~190 tok | **5×** |
 | Pagination | ~995 tok | ~203 tok | **5×** |
 | Console.log for debugging | ~419 tok | ~106 tok | **4×** |
 | PDF invoice generation | ~4,281 tok | ~2,281 tok | **2×** |
 
-These sixteen tasks — a normal vibe-coding afternoon — cost **87,688 tokens greedy vs. 4,572 tokens lean**. That's a $1.10 difference, every time, without changing a single prompt.
+These seventeen tasks — a normal vibe-coding afternoon — cost **88,655 tokens greedy vs. 4,762 tokens lean**. That's a $1.10 difference, every time, without changing a single prompt.
 
-*Real outputs from 22 independent test agents. Full code, character-counted. Each scenario tested think-twice only, surgical only, and both — to show which skill drives savings and when one beats the other. [Three-way breakdown →](tests/summary.md)*
+*Real outputs from 17 benchmark scenarios, tested independently under three conditions each: think-twice only, surgical only, and both combined. [Three-way breakdown →](tests/summary.md)*
+
+The gap isn't narrow. Across 17 real tasks — bug fixes, scripts, API integrations, data generation — savings range from **2× to 178×**, with a median of **8×**.
+
+<div align="center">
+
+![Token reduction across 17 benchmarks](assets/chart-multipliers.svg)
+
+</div>
+
+That spread exists because the waste doesn't come from one place. There are two independent failure modes.
+
+<div align="center">
+
+![Two failure modes](assets/chart-failure-modes.svg)
+
+</div>
+
+**Scope creep** is Claude adding what you didn't ask for — `--dry-run` flags, docstrings, error handling, test suites — on top of a task with a fixed, bounded answer. The task is small; the creep is not. surgical catches this.
+
+**Wrong strategy** is Claude picking the expensive path when a library, API, or built-in already solves it correctly and completely. 124 airports hardcoded when there are 10,000. A holiday set that expires January 1. Hand-rolled `deepClone` when `structuredClone()` is a built-in. think-twice catches this.
+
+These aren't variations of the same problem — a task can trigger one, both, or neither. Which is why the skills are separate.
+
+<div align="center">
+
+![Which skill drives savings](assets/chart-skill-attribution.svg)
+
+</div>
+
+surgical catches more scenarios by count. think-twice catches the expensive ones — the **178×** outlier lives in that slice. When both failure modes are present, the multipliers stack.
 
 ---
 
