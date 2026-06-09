@@ -1,14 +1,14 @@
 {
   "name": "lazy-cat",
   "version": "2.0.0",
-  "description": "Two Claude Code skills that eliminate token waste: think-twice (pick the cheaper approach before starting) and surgical (build only what was asked). The best tokens are the ones you didn't spend.",
+  "description": "Teaches your AI coding agent productive laziness: think-twice (pick the cheaper approach before starting) and surgical (build only what was asked). The best tokens are the ones you didn't spend. Works with Claude Code, Gemini CLI, and Codex.",
   "bin": {
     "lazy-cat": "bin/install.js"
   },
   "files": [
     "bin",
     "skills",
-    "commands"
+    "rules"
   ],
   "scripts": {
     "test": "node tests/install.test.js"

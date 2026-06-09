@@ -4,26 +4,33 @@ const os = require("node:os");
 const path = require("node:path");
 
 const pkgRoot = path.join(__dirname, "..");
-const configDir =
-  process.env.CLAUDE_CONFIG_DIR || path.join(os.homedir(), ".claude");
+const project = process.argv.includes("--project");
+const base = project ? process.cwd() : os.homedir();
 
 const skillsSrc = path.join(pkgRoot, "skills");
 const commandsSrc = path.join(pkgRoot, "commands");
 const commandsDest = path.join(configDir, "commands", "lazy-cat");
 
-for (const name of fs.readdirSync(skillsSrc)) {
-  fs.cpSync(
-    path.join(skillsSrc, name),
-    path.join(configDir, "skills", name),
-    { recursive: true }
-  );
+function copyDirInto(srcDir, destDir) {
+  for (const name of fs.readdirSync(srcDir)) {
+    fs.cpSync(path.join(srcDir, name), path.join(destDir, name), {
+      recursive: true,
+    });
+  }
 }
 
-fs.mkdirSync(commandsDest, { recursive: true });
-for (const name of fs.readdirSync(commandsSrc)) {
-  fs.cpSync(path.join(commandsSrc, name), path.join(commandsDest, name), {
-    recursive: true,
-  });
+// Write the portable rule block into an instructions file, idempotently:
+// replace an existing lean block between markers, or append a new one.
+function writeRules(file, block) {
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  const existing = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
+  const re = new RegExp(`${START}[\\s\\S]*?${END}`);
+  const next = re.test(existing)
+    ? existing.replace(re, block)
+    : existing
+    ? `${existing.trimEnd()}\n\n${block}\n`
+    : `${block}\n`;
+  fs.writeFileSync(file, next);
 }
 
 console.log(`lazy-cat installed to ${configDir}`);
