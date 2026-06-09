@@ -1,6 +1,6 @@
 # Code of Conduct
 
-lean is built on one principle: do what's needed, nothing more. That applies to code and to how we treat each other here.
+lazy-cat is built on one principle: do what's needed, nothing more. That applies to code and to how we treat each other here.
 
 ## The short version
 

@@ -1,6 +1,6 @@
 {
-  "name": "lean",
-  "id": "lean",
+  "name": "lazy-cat",
+  "id": "lazy-cat",
   "owner": {
     "name": "albertobarnabo"
   },
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "lean",
+      "name": "lazy-cat",
       "source": "./",
       "description": "Two skills: think-twice forces Claude to check for existing APIs, packages, and simpler approaches before implementing. Surgical forces Claude to build exactly what was asked, nothing more. Tested savings: 178x on fake user profiles, 16x on bug fixes, 13x on currency conversion, 6x on city autocomplete, 5x on rate limiting.",
       "version": "2.0.0",

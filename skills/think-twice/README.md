@@ -2,7 +2,7 @@
 
 > Forces Claude to pause before any high-cost task and ask: "Is there a cleverer, cheaper way to do this?"
 
-Part of the **lean** plugin — [albertobarnabo/lean](https://github.com/albertobarnabo/lean)
+Part of the **lazy-cat** plugin — [albertobarnabo/lazy-cat](https://github.com/albertobarnabo/lazy-cat)
 
 ---
 
@@ -88,13 +88,13 @@ Measured from full code outputs, character-counted by independent test agents.
 
 **This skill only:**
 ```bash
-curl -sL https://raw.githubusercontent.com/albertobarnabo/lean/main/skills/think-twice/SKILL.md \
+curl -sL https://raw.githubusercontent.com/albertobarnabo/lazy-cat/main/skills/think-twice/SKILL.md \
   -o ~/.claude/skills/think-twice/SKILL.md --create-dirs
 ```
 
-**Full lean plugin (think-twice + surgical):**
+**Full lazy-cat plugin (think-twice + surgical):**
 ```
-/plugin install albertobarnabo/lean
+/plugin install albertobarnabo/lazy-cat
 ```
 
 ---

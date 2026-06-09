@@ -3,7 +3,7 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 
-const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "lean-install-"));
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "lazy-cat-install-"));
 const installer = path.join(__dirname, "..", "bin", "install.js");
 
 execFileSync("node", [installer], {
@@ -14,8 +14,8 @@ execFileSync("node", [installer], {
 const expected = [
   "skills/think-twice/SKILL.md",
   "skills/surgical/SKILL.md",
-  "commands/lean/think-twice.md",
-  "commands/lean/surgical.md",
+  "commands/lazy-cat/think-twice.md",
+  "commands/lazy-cat/surgical.md",
 ];
 
 let failed = false;
