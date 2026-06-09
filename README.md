@@ -13,7 +13,7 @@
 
 > *"A great engineer is a lazy engineer. They find the clever shortcut."* — Steve Jobs
 
-**lazy-cat** is a Claude Code plugin that gives your AI the instinct great engineers are known for:<br/>pause before working hard, and make sure you can't work smart instead.
+Cats don't run when they can walk. **lazy-cat** gives Claude the same instinct great engineers are known for:<br/>pause before working hard, and make sure you can't work smart instead.
 
 </div>
 
@@ -281,6 +281,8 @@ In all cases, Claude proceeds — and **states why** it's overriding.
 ---
 
 ## The Philosophy
+
+*Cats have always known this. They invented productive laziness.*
 
 Lean thinking is not about doing less carelessly. It's about doing *exactly what creates value* — and cutting everything else before it costs you.
 
