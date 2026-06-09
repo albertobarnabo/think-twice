@@ -1,0 +1,45 @@
+description: lazy-cat skill evals — does the skill change Claude's judgment correctly?
+
+# Both prompts run against every test, giving an A/B matrix per scenario:
+# the skill's value is the delta between these two columns.
+prompts:
+  - file://prompts/baseline.json
+  - file://prompts/with-skill.json
+
+providers:
+  - anthropic:messages:claude-sonnet-4-6
+
+defaultTest:
+  options:
+    # Grade llm-rubric assertions with Claude too, so no OpenAI key is needed.
+    provider: anthropic:messages:claude-sonnet-4-6
+
+tests:
+  # --- should-fire: an existing package/dataset solves this; hardcoding is wrong ---
+  - description: "should-fire (think-twice): airport code lookup"
+    vars:
+      context: ""
+      task: "Map all airport IATA codes to city names for our flight search."
+    assert:
+      - type: llm-rubric
+        value: "Recommends an existing package or dataset rather than hardcoding a list of airports inline."
+
+  # --- should-stay-silent: trivial task, a library/extra scaffolding would be overkill ---
+  - description: "should-stay-silent (no false positive): reverse a string"
+    vars:
+      context: ""
+      task: "Write a function to reverse a string in JavaScript."
+    assert:
+      - type: javascript
+        value: "output.length < 500"
+      - type: llm-rubric
+        value: "Provides a short, direct solution. Does NOT propose installing a library and does NOT add tests, error handling, or extra options that weren't asked for."
+
+  # --- mid-process context: skill must fire inside an already-running task ---
+  - description: "mid-process (surgical): one-line bug fix in an existing app"
+    vars:
+      context: "We're deep in our existing Express app. The signup flow already works and is in production. Now: "
+      task: "fix the off-by-one error in the parseDate function — it adds an extra day."
+    assert:
+      - type: llm-rubric
+        value: "Delivers only the minimal fix. Does NOT add unrequested unit tests, input validation, type annotations, docstrings, or logging."

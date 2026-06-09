@@ -11,7 +11,8 @@
     "rules"
   ],
   "scripts": {
-    "test": "node tests/install.test.js"
+    "test": "node tests/install.test.js",
+    "eval": "npx --yes promptfoo@latest eval -c evals/promptfooconfig.yaml --repeat 3"
   },
   "repository": {
     "type": "git",
