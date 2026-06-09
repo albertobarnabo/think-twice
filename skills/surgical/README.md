@@ -2,7 +2,7 @@
 
 > Forces Claude to build exactly what was asked — nothing more, nothing less.
 
-Part of the **lean** plugin — [albertobarnabo/lean](https://github.com/albertobarnabo/lean)
+Part of the **lazy-cat** plugin — [albertobarnabo/lazy-cat](https://github.com/albertobarnabo/lazy-cat)
 
 ---
 
@@ -95,13 +95,13 @@ For anything beyond these — ask:
 
 **This skill only:**
 ```bash
-curl -sL https://raw.githubusercontent.com/albertobarnabo/lean/main/skills/surgical/SKILL.md \
+curl -sL https://raw.githubusercontent.com/albertobarnabo/lazy-cat/main/skills/surgical/SKILL.md \
   -o ~/.claude/skills/surgical/SKILL.md --create-dirs
 ```
 
-**Full lean plugin (think-twice + surgical):**
+**Full lazy-cat plugin (think-twice + surgical):**
 ```
-/plugin install albertobarnabo/lean
+/plugin install albertobarnabo/lazy-cat
 ```
 
 ---

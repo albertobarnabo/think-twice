@@ -1,8 +1,8 @@
 {
-  "name": "lean",
+  "name": "lazy-cat",
   "description": "Two skills that eliminate the two biggest sources of token waste: think-twice (pick the cheaper approach before starting) and surgical (build only what was asked, nothing more). The best tokens are the ones you didn't spend.",
   "version": "2.0.0",
-  "repository": "https://github.com/albertobarnabo/lean",
+  "repository": "https://github.com/albertobarnabo/lazy-cat",
   "author": {
     "name": "albertobarnabo"
   },

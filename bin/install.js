@@ -7,8 +7,9 @@ const pkgRoot = path.join(__dirname, "..");
 const project = process.argv.includes("--project");
 const base = project ? process.cwd() : os.homedir();
 
-const START = "<!-- lean:start -->";
-const END = "<!-- lean:end -->";
+const skillsSrc = path.join(pkgRoot, "skills");
+const commandsSrc = path.join(pkgRoot, "commands");
+const commandsDest = path.join(configDir, "commands", "lazy-cat");
 
 function copyDirInto(srcDir, destDir) {
   for (const name of fs.readdirSync(srcDir)) {
@@ -32,26 +33,7 @@ function writeRules(file, block) {
   fs.writeFileSync(file, next);
 }
 
-// --- Claude Code: install skills (invoked as /think-twice, /surgical) ---
-const claudeDir = project
-  ? path.join(base, ".claude")
-  : process.env.CLAUDE_CONFIG_DIR || path.join(base, ".claude");
-copyDirInto(path.join(pkgRoot, "skills"), path.join(claudeDir, "skills"));
-
-// --- Gemini + Codex: write the rule block into their instruction files ---
-const rules = fs.readFileSync(path.join(pkgRoot, "rules", "lean.md"), "utf8").trim();
-const block = `${START}\n${rules}\n${END}`;
-const geminiFile = project
-  ? path.join(base, "GEMINI.md")
-  : path.join(base, ".gemini", "GEMINI.md");
-const codexFile = project
-  ? path.join(base, "AGENTS.md")
-  : path.join(base, ".codex", "AGENTS.md");
-writeRules(geminiFile, block);
-writeRules(codexFile, block);
-
-console.log(`lean installed (${project ? "project" : "global"})`);
-console.log(`  Claude: ${path.join(claudeDir, "skills")}  (/think-twice, /surgical)`);
-console.log(`  Gemini: ${geminiFile}`);
-console.log(`  Codex:  ${codexFile}`);
-console.log("Restart your agent session so the rules/skills load.");
+console.log(`lazy-cat installed to ${configDir}`);
+console.log("  skills:   think-twice, surgical");
+console.log("  commands: /lazy-cat:think-twice, /lazy-cat:surgical");
+console.log("Restart your Claude Code session so the skills load.");

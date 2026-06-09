@@ -1,19 +1,19 @@
 <div align="center">
 
-# lean
-
-### *The best tokens are the ones you never spent.*
+<img src="assets/lazy-cat.png" alt="lazy-cat" width="200"/>
+<h1>lazy-cat</h1>
+<h3><em>The best tokens are the ones you never spent.</em></h3>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-blueviolet)](https://claude.ai/code)
-[![Version](https://img.shields.io/badge/version-2.0.0-orange)](https://github.com/albertobarnabo/lean)
+[![Version](https://img.shields.io/badge/version-2.0.0-orange)](https://github.com/albertobarnabo/lazy-cat)
 [![Tokens saved](https://img.shields.io/badge/8x%20fewer%20tokens-median%20across%2017%20tasks-brightgreen)](#token-cost-at-a-glance)
 
 <br/>
 
 > *"A great engineer is a lazy engineer. They find the clever shortcut."* — Steve Jobs
 
-**lean** is a Claude Code plugin that gives your AI the instinct great engineers are known for:<br/>pause before working hard, and make sure you can't work smart instead.
+**lazy-cat** is a Claude Code plugin that gives your AI the instinct great engineers are known for:<br/>pause before working hard, and make sure you can't work smart instead.
 
 </div>
 
@@ -27,7 +27,7 @@ AI agents have a muda problem. Given any task, Claude charges ahead with the mos
 
 The result: thousands of unnecessary tokens. Work that didn't need to happen. Waste.
 
-**lean fixes this at the only two moments that matter.**
+**lazy-cat fixes this at the only two moments that matter.**
 
 ---
 
@@ -41,16 +41,16 @@ The result: thousands of unnecessary tokens. Work that didn't need to happen. Wa
 think-twice asks: *is there a smarter path?*
 surgical asks: *did the user actually ask for this?*
 
-Together they enforce lean at every level — strategy and execution.
+Together they enforce lazy-cat at every level — strategy and execution.
 
 ---
 
 ## Token Cost at a Glance
 
-Ask Claude to generate 500 staging user profiles. Without lean, it writes every profile inline — all 500, field by field, 66,320 tokens of output. With lean, it writes a 54-line faker script instead. 372 tokens.
+Ask Claude to generate 500 staging user profiles. Without lazy-cat, it writes every profile inline — all 500, field by field, 66,320 tokens of output. With lazy-cat, it writes a 54-line faker script instead. 372 tokens.
 
-> **Without lean:** ~66,320 tokens — about **$1.00** at Claude Sonnet API pricing.
-> **With lean:** ~372 tokens — about **half a cent.**
+> **Without lazy-cat:** ~66,320 tokens — about **$1.00** at Claude Sonnet API pricing.
+> **With lazy-cat:** ~372 tokens — about **half a cent.**
 > Same result. 178× the cost.
 
 That's not an edge case. That's the default behavior of every AI that hasn't been taught to think first.
@@ -75,7 +75,7 @@ That's not an edge case. That's the default behavior of every AI that hasn't bee
 | Console.log for debugging | ~419 tok | ~106 tok | **4×** |
 | PDF invoice generation | ~4,281 tok | ~2,281 tok | **2×** |
 
-These seventeen tasks — a normal vibe-coding afternoon — cost **88,655 tokens greedy vs. 4,762 tokens lean**. That's a $1.10 difference, every time, without changing a single prompt.
+These seventeen tasks — a normal vibe-coding afternoon — cost **88,655 tokens greedy vs. 4,762 tokens with lazy-cat**. That's a $1.10 difference, every time, without changing a single prompt.
 
 *Real outputs from 17 benchmark scenarios, tested independently under three conditions each: think-twice only, surgical only, and both combined. [Three-way breakdown →](tests/summary.md)*
 
@@ -231,14 +231,14 @@ Writing into `GEMINI.md` / `AGENTS.md` is non-destructive — the block sits bet
 
 **Via plugin system:**
 ```
-/plugin marketplace add albertobarnabo/lean
-/plugin install lean@lean
+/plugin marketplace add albertobarnabo/lazy-cat
+/plugin install lazy-cat@lazy-cat
 ```
-First register the repo as a marketplace, then install the `lean` plugin from it. The `@lean` suffix is the marketplace name. Restart your session afterward so the skills load.
+First register the repo as a marketplace, then install the `lazy-cat` plugin from it. The `@lazy-cat` suffix is the marketplace name. Restart your session afterward so the skills load.
 
 **Via curl** (installs both skills):
 ```bash
-BASE="https://raw.githubusercontent.com/albertobarnabo/lean/main/skills"
+BASE="https://raw.githubusercontent.com/albertobarnabo/lazy-cat/main/skills"
 for skill in think-twice surgical; do
   curl -sL "$BASE/$skill/SKILL.md" -o ~/.claude/skills/$skill/SKILL.md --create-dirs
 done
@@ -247,11 +247,11 @@ done
 **Single skill only:**
 ```bash
 # think-twice only
-curl -sL https://raw.githubusercontent.com/albertobarnabo/lean/main/skills/think-twice/SKILL.md \
+curl -sL https://raw.githubusercontent.com/albertobarnabo/lazy-cat/main/skills/think-twice/SKILL.md \
   -o ~/.claude/skills/think-twice/SKILL.md --create-dirs
 
 # surgical only
-curl -sL https://raw.githubusercontent.com/albertobarnabo/lean/main/skills/surgical/SKILL.md \
+curl -sL https://raw.githubusercontent.com/albertobarnabo/lazy-cat/main/skills/surgical/SKILL.md \
   -o ~/.claude/skills/surgical/SKILL.md --create-dirs
 ```
 
@@ -259,8 +259,8 @@ curl -sL https://raw.githubusercontent.com/albertobarnabo/lean/main/skills/surgi
 
 | Command | What it does |
 |---|---|
-| `/lean:think-twice <task>` | Run the full lean checklist before starting |
-| `/lean:surgical <task>` | Implement with zero scope creep — exactly what was asked |
+| `/lazy-cat:think-twice <task>` | Run the full think-twice checklist before starting |
+| `/lazy-cat:surgical <task>` | Implement with zero scope creep — exactly what was asked |
 
 ---
 
@@ -288,7 +288,7 @@ Steve Jobs wasn't romanticizing laziness. He was describing the highest form of 
 
 Most AI coding tools optimize for *doing more*. They generate thoroughly, completely, defensively — because generating is what they're good at.
 
-lean optimizes for *doing right*. Two questions, two moments, before the tokens flow:
+lazy-cat optimizes for *doing right*. Two questions, two moments, before the tokens flow:
 
 > *Is there a smarter path?*
 > *Is this exactly what was asked?*
@@ -302,17 +302,31 @@ That's it. The rest follows.
 - [@albertobarnabo](https://github.com/albertobarnabo) — author
 - [@ayoubighissou99](https://github.com/ayoubighissou99) — co-author
 
+This project follows a [code of conduct](CODE_OF_CONDUCT.md). By contributing, you agree to abide by it.
+
 ---
 
 ## Contributing
 
-Found a new waste pattern — a task where Claude defaults to the expensive path when a better one exists? Open a PR:
+The most useful contribution is a benchmark nobody has run yet — a real task where Claude defaulted to the expensive path when a better one existed. If you've seen it happen, it belongs here.
 
-- A new shortcut row in an existing skill's table
-- A new skill for a pattern not yet covered
-- A real token-cost comparison from your own usage
+**To submit a benchmark:**
 
-The best contributions, like the best code, are the ones that do exactly what's needed — nothing more.
+1. Run the task with and without lazy-cat — write out the actual code outputs, don't summarize
+2. Count characters, estimate tokens (chars ÷ 4)
+3. Copy the format from any file in [`tests/`](tests/)
+4. Open a PR with your file as `tests/NN-benchmark-your-scenario.md`
+
+A good benchmark has a task someone would actually give Claude, real code for both conditions (not pseudocode), and a clear winner with a reason. See [`tests/summary.md`](tests/summary.md) for the full picture of what's already covered.
+
+**Other ways to contribute:**
+
+- A new skill for a failure mode the current two don't cover
+- Verified results in a language we haven't tested (Go, Rust, Swift, Java)
+- Platform-specific install instructions (Cursor, Codex CLI, Gemini CLI)
+- A real-world saving from your own codebase — even a one-liner in an issue
+
+The best contributions, like the best code, do exactly what's needed — nothing more.
 
 ---
 

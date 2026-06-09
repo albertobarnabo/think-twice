@@ -3,6 +3,7 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "lazy-cat-install-"));
 const installer = path.join(__dirname, "..", "bin", "install.js");
 const tmps = [];
 
@@ -12,9 +13,12 @@ function tmpdir() {
   return d;
 }
 
-function run(args, opts) {
-  execFileSync("node", [installer, ...args], { stdio: "inherit", ...opts });
-}
+const expected = [
+  "skills/think-twice/SKILL.md",
+  "skills/surgical/SKILL.md",
+  "commands/lazy-cat/think-twice.md",
+  "commands/lazy-cat/surgical.md",
+];
 
 let failed = false;
 function check(label, ok) {
