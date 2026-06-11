@@ -1,11 +1,14 @@
 ---
 name: think-twice
 description: >
-  Forces Claude to pause before any high-cost task and ask: "Is there a cleverer, cheaper way to do
-  this?" Triggers before heavy computation, large code generation, repetitive data writing, or any
-  implementation that feels like hard work. Claude must run a full think-twice check — questioning the
-  approach, the scope, and the strategy — before committing tokens to the obvious path. The goal is
-  productive laziness: always find the shortcut if one exists, always do less if less is enough.
+  Forces Claude to pause before picking an implementation approach and ask: "Is there a cleverer,
+  cheaper way?" Triggers when the request involves generating data or fixtures (lists, datasets,
+  sample records), implementing a problem that is likely already solved by a stdlib function,
+  package, or public API (validation, parsing, lookups, auth, date/currency/geo data), or any
+  implementation expected to exceed ~20 lines. Does NOT trigger when the user has explicitly
+  chosen the approach or library, when the task is under ~10 lines, when fixing a bug in existing
+  code, or for infra/terraform/k8s and DB queries. Run the checklist before writing code, stop at
+  the first question that reveals a cheaper path, and take that path.
 ---
 
 # Lazy Agent — Work Smarter, Not Harder

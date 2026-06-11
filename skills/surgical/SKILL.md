@@ -1,12 +1,14 @@
 ---
 name: surgical
 description: >
-  Forces Claude to match output scope exactly to what was requested. Triggers before adding error
-  handling for impossible edge cases, extracting one-time abstractions into classes, writing tests
-  that weren't asked for, refactoring surrounding code during a bug fix, or future-proofing with
-  config options nobody requested. Does not trigger when error handling, tests, or validation are
-  the explicit subject of the request. The best code is code you didn't write.
-version: 1.0.0
+  Forces Claude to match output scope exactly to what was requested. Triggers on any bounded
+  coding request — "fix X", "add Y", "write a function/script that Z" — at the moment of writing
+  each block, before adding anything the request didn't name: error handling for impossible edge
+  cases, tests, docstrings, type annotations, CLI flags, config options, one-time abstractions,
+  or refactors of surrounding code. Does NOT trigger when error handling, tests, or validation
+  are the explicit subject of the request, or when the user asked for a complete or
+  production-ready implementation. The best code is code you didn't write.
+version: 1.1.0
 ---
 
 # Surgical — Build Exactly What Was Asked
@@ -142,9 +144,19 @@ Override this skill when:
 
 ---
 
-## The Rule
+## Output Contract
 
-**Build exactly what was asked. Note what was deliberately left out.
-Never silently expand the scope.**
+Every response that delivers code under this skill closes with two lines:
+
+```
+Done: <what was changed/built, one line>
+Left out: <what was deliberately not added — tests, validation, flags — or "nothing">
+```
+
+The "Left out" line is the enforcement mechanism: it forces the scope decision to be
+explicit instead of silent, and it hands the user a one-word path to expand scope if
+they want to ("add them").
+
+**Build exactly what was asked. Never silently expand the scope.**
 
 If scope is genuinely ambiguous — ask the user one targeted question before writing any code.
